@@ -5,7 +5,9 @@
     "private": true,
     "scripts": {
         "build": "vite build",
-        "check": "svelte-check --tsconfig ./tsconfig.json"
+        "check": "svelte-check --tsconfig ./tsconfig.json",
+        "start:msedge": "web-ext run --source-dir ./dist --target=chromium --chromium-binary \"C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe\"",
+        "run": "yarn build && yarn start:msedge"
     },
     "license": "MIT",
     "dependencies": {
@@ -17,6 +19,7 @@
         "svelte-check": "^2.8.0",
         "svelte-preprocess": "^4.10.7",
         "typescript": "^4.7.4",
-        "vite": "^2.9.14"
+        "vite": "^2.9.14",
+        "web-ext": "^7.1.1"
     }
 }
