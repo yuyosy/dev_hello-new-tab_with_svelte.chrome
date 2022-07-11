@@ -26,7 +26,7 @@
                     </a>
                 </li>
                 {/each}
-                <span class="bookmark-count">19 bookmarks</span>
+                <span class="bookmark-count">{folder.children.length} bookmark{folder.children.length === 1 ? '' : 's'}</span>
             </ul>
         </div>
     {/each}
