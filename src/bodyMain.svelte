@@ -9,12 +9,12 @@
     let promise = getbookmark()
 </script>
 
-<main>HelloNewTab</main>
 
 {#await promise}
     <p>...waiting</p>
 {:then results}
     {#each results as folder}
+        {#if folder.children.length > 0}
         <div>
             <div class="content-header">{folder.title}</div>
             <ul>
@@ -29,6 +29,7 @@
                 <span class="bookmark-count">{folder.children.length} bookmark{folder.children.length === 1 ? '' : 's'}</span>
             </ul>
         </div>
+        {/if}
     {/each}
 {:catch error}
     <p style="color: red">{error.message}</p>
