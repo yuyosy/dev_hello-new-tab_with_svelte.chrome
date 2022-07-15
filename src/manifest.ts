@@ -24,7 +24,8 @@ const manifest: ManifestV3Export = {
     },
     content_security_policy: {
         extension_pages: "script-src 'self'; object-src 'self'"
-    }
+    },
+    options_page: 'src/options.html'
 }
 
 export {manifest}
