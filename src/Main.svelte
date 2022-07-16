@@ -8,7 +8,7 @@
         let results: Folder[] = getBookmarkItems(bookmarks);
         return results;
     };
-    
+
     let promise = getbookmark();
 
     let macy;
@@ -19,7 +19,31 @@
         margin: { x: 30, y: 15 },
         breakAt: { 1400: 6, 1200: 5, 990: 4, 780: 3, 620: 2, 430: 1 },
     };
+
+    chrome.bookmarks.onChanged.addListener(() => {
+        promise = getbookmark();
+    });
+    chrome.bookmarks.onMoved.addListener(() => {
+        promise = getbookmark();
+    });
+    chrome.bookmarks.onCreated.addListener(() => {
+        promise = getbookmark();
+    });
+    chrome.bookmarks.onChanged.addListener(() => {
+        promise = getbookmark();
+    });
+    chrome.bookmarks.onMoved.addListener(() => {
+        promise = getbookmark();
+    });
+    chrome.bookmarks.onChildrenReordered.addListener(() => {
+        promise = getbookmark();
+    });
+    chrome.bookmarks.onRemoved.addListener(() => {
+        promise = getbookmark();
+    });
+
 </script>
+
 {#await promise then results}
     <Macy bind:macy options={macyOptions}>
         {#each results as folder}
