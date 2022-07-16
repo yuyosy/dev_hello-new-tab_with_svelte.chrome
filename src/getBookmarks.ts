@@ -1,6 +1,6 @@
 
 const getBookmarkItems = (treeNodes: chrome.bookmarks.BookmarkTreeNode[]): Folder[] => {
-    const flattenNodes: { [name: string]: Folder } = {}
+    const flattenNodes: Folder[] = []
     const walk = (nodes: chrome.bookmarks.BookmarkTreeNode[], paths: string[]):void => {
         nodes.forEach((node: chrome.bookmarks.BookmarkTreeNode) => {
             if (node.children && node.children.length === 0) {
@@ -9,16 +9,17 @@ const getBookmarkItems = (treeNodes: chrome.bookmarks.BookmarkTreeNode[]): Folde
             if (node.children && node.children.length > 0) {
                 const folderName:string = node.parentId === '0' ? '' : node.title;
                 const curentPaths:string[] = [...paths, folderName]
-                flattenNodes[node.id] = {
+                flattenNodes.push({
                     id: node.id,
                     title: node.title,
                     path: curentPaths.join('/'),
                     visible: true,
                     children: []
-                }
+                })
                 walk(node.children, curentPaths);
             } else {
-                flattenNodes[node.parentId].children.push(
+                const parentNode = flattenNodes.find(obj => obj.id === node.parentId);
+                parentNode.children.push(
                     {
                         id: node.id,
                         title: node.title,
@@ -33,7 +34,7 @@ const getBookmarkItems = (treeNodes: chrome.bookmarks.BookmarkTreeNode[]): Folde
     treeNodes.forEach((topLevelGroup) => {
         walk(topLevelGroup.children, []);
     })
-    return Object.values(flattenNodes);
+    return flattenNodes;
 }
 
 const getBookmarkSearchItems = (treeNodes: chrome.bookmarks.BookmarkTreeNode[]): BookmarkSearchResult[] => {
