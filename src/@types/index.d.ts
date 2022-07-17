@@ -22,3 +22,7 @@ interface BookmarkSearchResult {
     path: string;
     parent?: string;
 }
+
+interface Options {
+	[key: string]: string | number | boolean | object;
+}
