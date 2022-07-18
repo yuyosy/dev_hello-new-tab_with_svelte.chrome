@@ -1,7 +1,7 @@
-import type {ManifestV3Export} from "@crxjs/vite-plugin";
+import type { ManifestV3Export } from '@crxjs/vite-plugin';
 
 
-import pkgJson from "../package.json";
+import pkgJson from '../package.json';
 
 const manifest: ManifestV3Export = {
     manifest_version: 3,
@@ -17,7 +17,7 @@ const manifest: ManifestV3Export = {
     },
     permissions: [
         'bookmarks',
-        'chrome://favicon/'
+        'storage'
     ],
     chrome_url_overrides: {
         newtab: 'src/newtab.html'
@@ -25,7 +25,11 @@ const manifest: ManifestV3Export = {
     content_security_policy: {
         extension_pages: "script-src 'self'; object-src 'self'"
     },
-    options_page: 'src/options.html'
+    options_page: 'src/options.html',
+	// background: {
+	// 	service_worker: 'src/background.ts',
+	// 	type : 'module'
+	// }
 }
 
-export {manifest}
+export { manifest }
