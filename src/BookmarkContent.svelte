@@ -8,7 +8,7 @@
         {#each folder.children as bookmark}
             <li>
                 <a title={bookmark.title} href={bookmark.url}>
-                    <!-- <img class="favicon" src={bookmark.faviconUrl} alt={bookmark.title} style="border-radius: 50%;"/> -->
+                    <img class="favicon" src={bookmark.faviconUrl} alt={bookmark.title}/>
                     {bookmark.title}
                 </a>
             </li>

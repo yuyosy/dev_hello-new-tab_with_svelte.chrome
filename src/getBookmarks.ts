@@ -1,4 +1,12 @@
 
+// https://github.com/GoogleChrome/chrome-extensions-samples/blob/main/api/favicon/content.js
+const getFaviconUrl = (u: string, size:number=16) =>  {
+    const faviconUrl = new URL(chrome.runtime.getURL('/_favicon/'));
+    faviconUrl.searchParams.set('pageUrl', u); // this encodes the URL as well
+    faviconUrl.searchParams.set('size', String(size));
+    return faviconUrl.toString();
+  }
+
 const getBookmarkItems = (treeNodes: chrome.bookmarks.BookmarkTreeNode[]): Folder[] => {
     const flattenNodes: Folder[] = []
     const walk = (nodes: chrome.bookmarks.BookmarkTreeNode[], paths: string[]):void => {
@@ -24,7 +32,8 @@ const getBookmarkItems = (treeNodes: chrome.bookmarks.BookmarkTreeNode[]): Folde
                         id: node.id,
                         title: node.title,
                         url: node.url,
-                        faviconUrl: 'chrome://favicon/'+node.url,
+                        // faviconUrl: 'chrome://favicon/'+node.url,
+                        faviconUrl: getFaviconUrl(node.url),
                         parent: node.parentId
                     }
                 )

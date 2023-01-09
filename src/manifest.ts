@@ -17,7 +17,8 @@ const manifest: ManifestV3Export = {
     },
     permissions: [
         'bookmarks',
-        'storage'
+        'storage',
+        'favicon'
     ],
     chrome_url_overrides: {
         newtab: 'src/newtab.html'
